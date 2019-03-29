@@ -24,6 +24,7 @@ public:
     //At present, we care about number cell ranges only!
     QString numberDataSource_numRef; // yval, val
     QString axDataSource_numRef; // xval, cat
+    QString serName; //Name of Ser
 };
 
 class XlsxAxis
@@ -75,8 +76,20 @@ protected:
 public:
     bool loadXmlXxxChart(QXmlStreamReader &reader);
     bool loadXmlSer(QXmlStreamReader &reader);
+    QString loadXmlSerName(QXmlStreamReader &reader);
     QString loadXmlNumRef(QXmlStreamReader &reader);
     bool loadXmlChartTitle(QXmlStreamReader &reader);
+    bool loadXmlLegend(QXmlStreamReader &reader);
+
+protected:
+    bool loadXmlLegendExtLst(QXmlStreamReader &reader);
+    bool loadXmlLegendLayout(QXmlStreamReader &reader);
+    bool loadXmlLegendLegendEntry(QXmlStreamReader &reader);
+    bool loadXmlLegendLegendPosition(QXmlStreamReader &reader);
+    bool loadXmlLegendLegendOverlay(QXmlStreamReader &reader);
+    bool loadXmlLegendSpr(QXmlStreamReader &reader);
+    bool loadXmlLegendTxpr(QXmlStreamReader &reader);
+    
 protected:
     bool loadXmlChartTitleTx(QXmlStreamReader &reader);
     bool loadXmlChartTitleTxRich(QXmlStreamReader &reader);
@@ -100,6 +113,7 @@ protected:
 public:
     void saveXmlChart(QXmlStreamWriter &writer) const;
     void saveXmlChartTitle(QXmlStreamWriter &writer) const;
+    void saveXmlChartLegend(QXmlStreamWriter &writer) const;
     void saveXmlPieChart(QXmlStreamWriter &writer) const;
     void saveXmlBarChart(QXmlStreamWriter &writer) const;
     void saveXmlLineChart(QXmlStreamWriter &writer) const;
@@ -108,6 +122,7 @@ public:
     void saveXmlDoughnutChart(QXmlStreamWriter &writer) const;
     void saveXmlSer(QXmlStreamWriter &writer, XlsxSeries *ser, int id) const;
     void saveXmlAxis(QXmlStreamWriter &writer) const;
+    void saveXmlLegend(QXmlStreamWriter &writer) const;
 protected:
     void saveXmlAxisCatAx(QXmlStreamWriter &writer, XlsxAxis* axis) const;
     void saveXmlAxisDateAx(QXmlStreamWriter &writer, XlsxAxis* axis) const;

@@ -19,6 +19,7 @@ public:
     ~CellRange();
 
     QString toString(bool row_abs=false, bool col_abs=false) const;
+    QString toStringTitle(bool row_abs, bool col_abs) const;
     bool isValid() const;
     inline void setFirstRow(int row) { top = row; }
     inline void setLastRow(int row) { bottom = row; }
