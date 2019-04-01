@@ -1220,6 +1220,7 @@ void ChartPrivate::saveXmlDoughnutChart(QXmlStreamWriter &writer) const
 
 void ChartPrivate::saveXmlSer(QXmlStreamWriter &writer, XlsxSeries *ser, int id) const
 {
+    //enum title  {"Testing!$A$1", "Testing!$B$1", "Testing!$C$1", "Testing!$D$1", "Testing!$E$1", "Testing!$F$1"}
     writer.writeStartElement(QStringLiteral("c:ser"));
     writer.writeEmptyElement(QStringLiteral("c:idx"));
     writer.writeAttribute(QStringLiteral("val"), QString::number(id));
@@ -1228,17 +1229,29 @@ void ChartPrivate::saveXmlSer(QXmlStreamWriter &writer, XlsxSeries *ser, int id)
 
     writer.writeStartElement(QStringLiteral("c:tx"));
         writer.writeStartElement(QStringLiteral("c:strRef"));
-            writer.writeTextElement(QStringLiteral("c:f"), ser->serName);
-            // writer.writeStartElement(QStringLiteral("c:strCache"));
-            // writer.writeEmptyElement(QStringLiteral("c:ptCount"));
-            // writer.writeAttribute(QStringLiteral("val"), "1");
-            // writer.writeEmptyElement(QStringLiteral("c:pt"));
-            // writer.writeAttribute(QStringLiteral("idx"), "0");
-            // writer.writeTextElement(QStringLiteral("c:v"), "Data");
-            // writer.writeEndElement(); //c:strCache
-
+            writer.writeTextElement(QStringLiteral("c:f"), ser->serName);//title[id]);
         writer.writeEndElement(); //c:strRef
     writer.writeEndElement(); //c:tx
+
+    if (id > 0){
+        //Line type setting
+        writer.writeStartElement(QStringLiteral("c:spPr"));
+        writer.writeStartElement(QStringLiteral("a:ln"));
+        writer.writeAttribute(QStringLiteral("w"), "12700");
+        writer.writeAttribute(QStringLiteral("cap"), "rnd");
+        writer.writeAttribute(QStringLiteral("cmpd"), "sng");
+        writer.writeAttribute(QStringLiteral("algn"), "ctr");
+        writer.writeEmptyElement(QStringLiteral("a:prstDash"));
+        writer.writeAttribute(QStringLiteral("val"), "dash");
+        writer.writeEndElement();
+        writer.writeEndElement();
+
+        //Marker setting
+        writer.writeStartElement(QStringLiteral("c:marker"));
+        writer.writeEmptyElement(QStringLiteral("c:symbol"));
+        writer.writeAttribute(QStringLiteral("val"), "none");
+        writer.writeEndElement();
+    }
 
     if (!ser->axDataSource_numRef.isEmpty()) {
         if (chartType == Chart::CT_ScatterChart || chartType == Chart::CT_BubbleChart)

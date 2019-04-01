@@ -131,7 +131,7 @@ QString CellRange::toString(bool row_abs, bool col_abs) const
         return CellReference(top, left).toString(row_abs, col_abs);
     }
 
-    QString cell_1 = CellReference(top, left).toString(row_abs, col_abs);
+    QString cell_1 = CellReference(top+1, left).toString(row_abs, col_abs);
     QString cell_2 = CellReference(bottom, right).toString(row_abs, col_abs);
     return cell_1 + QLatin1String(":") + cell_2;
 }
