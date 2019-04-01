@@ -25,6 +25,7 @@ public:
     QString numberDataSource_numRef; // yval, val
     QString axDataSource_numRef; // xval, cat
     QString serName; //Name of Ser
+    QString MaxRange;
 };
 
 class XlsxAxis
@@ -89,7 +90,7 @@ protected:
     bool loadXmlLegendLegendOverlay(QXmlStreamReader &reader);
     bool loadXmlLegendSpr(QXmlStreamReader &reader);
     bool loadXmlLegendTxpr(QXmlStreamReader &reader);
-    
+
 protected:
     bool loadXmlChartTitleTx(QXmlStreamReader &reader);
     bool loadXmlChartTitleTxRich(QXmlStreamReader &reader);

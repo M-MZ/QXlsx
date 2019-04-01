@@ -106,6 +106,7 @@ void Chart::addSeries(const CellRange &range, AbstractSheet *sheet)
             series->numberDataSource_numRef = sheetName + QLatin1String("!") + subRange.toString(true, true);
             series->serName = sheetName + QLatin1String("!") + subRange.toStringTitle(true, true);
             d->seriesList.append(series);
+
         }
 
     }
@@ -1276,6 +1277,7 @@ void ChartPrivate::saveXmlSer(QXmlStreamWriter &writer, XlsxSeries *ser, int id)
     }
 
     writer.writeEndElement();//c:ser
+
 }
 
 bool ChartPrivate::loadXmlAxisCatAx(QXmlStreamReader &reader)
@@ -2027,6 +2029,10 @@ void ChartPrivate::saveXmlAxisEG_AxShared(QXmlStreamWriter &writer, XlsxAxis* ax
     writer.writeStartElement(QStringLiteral("c:scaling")); // CT_Scaling (mandatory value)
         writer.writeEmptyElement(QStringLiteral("c:orientation")); // CT_Orientation
             writer.writeAttribute(QStringLiteral("val"), QStringLiteral("minMax")); // ST_Orientation
+       // writer.writeEmptyElement(QStringLiteral("c:min"));
+               // writer.writeAttribute(QStringLiteral("val"), QStringLiteral("0"));
+       // writer.writeEmptyElement(QStringLiteral("c:max"));
+           // writer.writeAttribute(QStringLiteral("val"), QStringLiteral("130"));
     writer.writeEndElement(); // c:scaling
 
     writer.writeEmptyElement(QStringLiteral("c:axPos")); // axPos CT_AxPos (mandatory value)
